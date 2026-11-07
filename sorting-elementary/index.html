@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Elementary Sorting Algorithms</title>
+  <meta name="description" content="Step through bubble sort, selection sort and insertion sort, with the C++ code highlighted at every step.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+  <script src="theme.js"></script>
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <div>
+        <h1>Elementary sorting algorithms</h1>
+        <p class="hint">Arrow keys or buttons to move &middot; Enter finishes the current pass</p>
+      </div>
+      <button type="button" class="theme-toggle" id="themeToggle">Light mode</button>
+    </header>
+
+    <div class="toolbar">
+      <div class="tabs" role="group" aria-label="Algorithm">
+        <button type="button" data-algorithm="bubble">Bubble sort</button>
+        <button type="button" data-algorithm="selection">Selection sort</button>
+        <button type="button" data-algorithm="insertion">Insertion sort</button>
+      </div>
+
+      <label class="mode">
+        Mode
+        <select id="modeSelect">
+          <option value="explore">Explore</option>
+          <option value="play">Practice: play the algorithm</option>
+          <option value="code">Practice: complete the code</option>
+        </select>
+      </label>
+    </div>
+
+    <form class="input" id="arrayForm">
+      <label for="arrayInput">Array to sort <span class="muted">(3 to 12 whole numbers)</span></label>
+      <div class="input-row">
+        <input id="arrayInput" type="text" inputmode="numeric" autocomplete="off" spellcheck="false">
+        <button type="submit">Sort this</button>
+        <button type="button" class="ghost" id="defaultButton">Default</button>
+      </div>
+      <p class="error" id="inputError" role="alert"></p>
+      <div class="presets">
+        <span class="muted">Try:</span>
+        <button type="button" class="chip" data-preset="3, 5, 8, 15, 17, 29, 30, 42">already sorted</button>
+        <button type="button" class="chip" data-preset="42, 30, 29, 17, 15, 8, 5, 3">reversed</button>
+        <button type="button" class="chip" data-preset="17, 5, 30, 5, 17, 8, 30, 3">with duplicates</button>
+        <button type="button" class="chip" data-preset="5, 8, 15, 3, 17, 29, 30, 42">one out of place</button>
+      </div>
+    </form>
+
+    <div class="workspace">
+      <section class="stage" aria-label="Array">
+        <div class="challenge" id="challenge" hidden>
+          <span class="challenge-title" id="challengeTitle"></span>
+          <div class="challenge-actions">
+            <button type="button" class="ghost small" id="challengePrev" aria-label="Previous challenge">&lsaquo;</button>
+            <button type="button" class="ghost small" id="challengeNext" aria-label="Next challenge">&rsaquo;</button>
+            <button type="button" class="ghost small" id="retryButton">Try another option</button>
+          </div>
+        </div>
+        <div class="held" id="held">
+          <span class="held-label">key</span>
+          <span class="held-value" id="heldValue"></span>
+        </div>
+        <div class="track">
+          <div class="array" id="array"></div>
+          <div class="pointers" id="pointers" aria-hidden="true"></div>
+        </div>
+
+        <p class="phase" id="phase"></p>
+        <p class="status" id="status" aria-live="polite"></p>
+
+        <div class="question" id="question" hidden>
+          <p class="question-prompt" id="questionPrompt"></p>
+          <pre class="question-code" id="questionCode" hidden></pre>
+          <div class="question-actions" id="questionActions"></div>
+        </div>
+        <p class="feedback" id="feedback" aria-live="polite" hidden></p>
+
+        <dl class="meters">
+          <div class="meter"><dt>Pass</dt><dd id="passValue">0</dd></div>
+          <div class="meter"><dt>Comparisons</dt><dd id="comparisonsValue">0</dd></div>
+          <div class="meter"><dt id="movesLabel">Swaps</dt><dd id="movesValue">0</dd></div>
+          <div class="meter score" id="score" hidden>
+            <dt>Correct</dt><dd id="correctValue">0</dd>
+            <dt>Mistakes</dt><dd id="mistakesValue">0</dd>
+          </div>
+        </dl>
+
+        <div class="controls">
+          <button type="button" class="ghost" id="backButton">&larr; Back</button>
+          <button type="button" id="nextButton">Next &rarr;</button>
+          <button type="button" class="ghost" id="passButton">Finish this pass</button>
+          <button type="button" class="ghost" id="resetButton">Reset</button>
+        </div>
+      </section>
+
+      <section class="code-panel" aria-label="C++ code">
+        <pre class="code" id="code"></pre>
+        <dl class="variables" id="variables"></dl>
+      </section>
+    </div>
+
+    <ul class="legend" id="legend">
+      <li data-legend="compare"><span class="swatch compare"></span><span class="legend-label">being compared</span></li>
+      <li data-legend="moved"><span class="swatch moved"></span><span class="legend-label">just moved</span></li>
+      <li data-legend="same"><span class="swatch same"></span><span class="legend-label">compared, left alone</span></li>
+      <li data-legend="current"><span class="swatch current"></span><span class="legend-label"></span></li>
+      <li data-legend="sorted"><span class="swatch sorted"></span><span class="legend-label">sorted so far, may still shift</span></li>
+      <li data-legend="final"><span class="swatch final"></span><span class="legend-label">final position</span></li>
+    </ul>
+  </main>
+
+  <script src="practice.js"></script>
+  <script src="challenge.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
